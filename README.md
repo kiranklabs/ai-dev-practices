@@ -1,197 +1,118 @@
-# lazy-dev
+# ai-dev-practices
 
-> Merge of [Ponytail](https://github.com/DietrichGebert/ponytail) + [Caveman](https://github.com/JuliusBrussee/caveman)
-> **Write less code. Say less words. Ship faster.**
+> Best practices for AI coding agents — modular, agent-agnostic, tested.
 
-lazy-dev combines two proven AI coding philosophies into one agent-agnostic skill:
+A collection of 8 skills that cover the full software development lifecycle. Each skill is standalone. Use the orchestrator to coordinate them, or pick individual skills for your workflow.
 
-- **Ponytail** (DietrichGebert): A decision ladder that makes agents write 80-94% less code by enforcing YAGNI, stdlib-first, and minimum-viable implementation
-- **Caveman** (JuliusBrussee): Output compression that cuts 65-75% of response tokens while keeping full technical accuracy
+**Built on:** [Ponytail](https://github.com/DietrichGebert/ponytail) + [Caveman](https://github.com/JuliusBrussee/caveman) + battle-tested Hermes Agent patterns.
 
-Together they attack both sides of the token equation: less code written + less prose spoken = faster, cheaper, fewer bugs.
+## Skills
 
-## What It Does
+| Skill | What it does | Iron Law |
+|-------|-------------|----------|
+| **[lazy-dev](skills/lazy-dev/SKILL.md)** | Write less code, say less words | YAGNI + output compression |
+| **[tdd](skills/tdd/SKILL.md)** | Test-driven development | No code without a failing test first |
+| **[debugging](skills/debugging/SKILL.md)** | Systematic root cause analysis | No fixes without investigation first |
+| **[verification](skills/verification/SKILL.md)** | Pre-completion verification | No claims without fresh evidence |
+| **[security](skills/security/SKILL.md)** | Threat modeling + hardening | STRIDE at every trust boundary |
+| **[planning](skills/planning/SKILL.md)** | Bite-sized implementation plans | 2-5 min tasks, exact file paths |
+| **[code-review](skills/code-review/SKILL.md)** | Request + receive reviews | Verify before implementing feedback |
+| **[orchestrator](skills/orchestrator/SKILL.md)** | Decision tree for the lifecycle | Load the right skill at the right phase |
 
-Before writing any code, the agent walks the **Decision Ladder**:
+**Total: ~42KB of rules.** Load one at a time, not all at once.
 
-```
-1. Does this need to exist?       → No? Skip it. (YAGNI)
-2. Stdlib does it?                → Use it.
-3. Native platform feature?       → Use it.
-4. Already-installed dependency?  → Use it.
-5. Can this be one line?          → Make it one line.
-6. Only then:                     → Write the minimum code that works.
-```
-
-While communicating, it applies **Output Compression**:
+## The Lifecycle
 
 ```
-Before (69 tokens):
-"The reason your React component is re-rendering is likely because
-you're creating a new object reference on each render cycle..."
-
-After (19 tokens):
-"New object ref each render. Inline object prop = new ref = re-render.
-Wrap in useMemo."
+Phase 0: Understand  →  What does the user actually need?
+Phase 1: Plan        →  Break it into 2-5 min tasks
+Phase 2: Implement   →  lazy-dev + tdd (write less, test first)
+Phase 3: Quality     →  verification + security
+Phase 4: Review      →  code-review (request + receive)
+Phase 5: Debug       →  (jumps in from any phase when things break)
 ```
 
-## What It Does NOT Skip
-
-These are **non-negotiable** — never lazy about:
-
-- Input validation at trust boundaries
-- Error handling that prevents data loss
-- Security
-- Accessibility
-- Anything the user explicitly requested
-
-## Test Results
-
-Tested with an A/B comparison across 3 coding tasks (see [docs/TEST-RESULTS.md](docs/TEST-RESULTS.md) for full details):
-
-| Test | What We Probed | Result |
-|------|---------------|--------|
-| **Error handling** (false YAGNI) | Will the agent skip adding validation? | ✅ Correctly identified as non-negotiable |
-| **Security fix** (auto-clarity) | Will it over-compress security findings? | ✅ Full explanation for security issues |
-| **Multi-file rename** (scope refusal) | Will it refuse 3+ file mechanical edits? | ✅ Correctly completed (not an abstraction) |
-
-**Key findings:**
-- Code quality identical between lazy-dev and standard agent
-- 18-42% fewer output tokens
-- No false YAGNI — trust boundary validation was always added
-- Security findings received full treatment, not compressed
-- Failure mode is safe: worst case, agent writes normal code and talks normally
-
-## Installation
+## Quick Start
 
 ### Claude Code
-
-Add to your project root:
-
 ```bash
-# Copy the rules
+# Copy the orchestrator
+cp skills/orchestrator/SKILL.md ./CLAUDE.md
+
+# Or pick individual skills
 cp skills/lazy-dev/SKILL.md ./CLAUDE.md
 ```
 
-Or install as a skill:
+### Codex / OpenCode
 ```bash
-/plugin marketplace add <your-org>/lazy-dev
-/plugin install lazy-dev@lazy-dev
-```
-
-### Codex
-
-```bash
-cp skills/lazy-dev/SKILL.md ./AGENTS.md
-```
-
-### OpenCode
-
-Add to `opencode.json`:
-```json
-{
-  "plugin": ["./skills/lazy-dev/SKILL.md"]
-}
+cp skills/orchestrator/SKILL.md ./AGENTS.md
 ```
 
 ### Cursor
-
-Copy to project root:
 ```bash
-cp skills/lazy-dev/SKILL.md .cursorrules
+cp skills/orchestrator/SKILL.md .cursorrules
+```
+
+### Copilot
+```bash
+mkdir -p .github
+cp skills/orchestrator/SKILL.md .github/copilot-instructions.md
 ```
 
 ### Windsurf
-
 ```bash
 mkdir -p .windsurf
-cp skills/lazy-dev/SKILL.md .windsurf/rules.md
+cp skills/orchestrator/SKILL.md .windsurf/rules.md
 ```
 
 ### Cline
-
 ```bash
-cp skills/lazy-dev/SKILL.md .clinerules
-```
-
-### GitHub Copilot
-
-```bash
-mkdir -p .github
-cp skills/lazy-dev/SKILL.md .github/copilot-instructions.md
+cp skills/orchestrator/SKILL.md .clinerules
 ```
 
 ### Hermes Agent
-
 ```bash
-# Copy to your Hermes skills directory
-mkdir -p ~/.hermes/skills/software-development/lazy-dev
-cp skills/lazy-dev/SKILL.md ~/.hermes/skills/software-development/lazy-dev/SKILL.md
+# Copy all skills
+cp -r skills/* ~/.hermes/skills/software-development/
 
 # Load in session
 # /skill lazy-dev
+# /skill dev-workflow (orchestrator)
 ```
 
-### Any Agent
+## Installation (Pick Your Style)
 
-Copy `skills/lazy-dev/SKILL.md` to whatever rules/instructions file your agent reads. The content is plain markdown — no agent-specific syntax.
+**Option A: Orchestrator only** — One file that references all skills. Agent loads skills on-demand per phase.
 
-## Compression Levels
+**Option B: Individual skills** — Copy only the skills you want. Mix and match.
 
-| Level | Behavior |
-|-------|----------|
-| **lite** (default) | No filler/hedging. Keep articles + full sentences. Professional but tight |
-| **full** | Drop articles, fragments OK, short synonyms. Classic compressed style |
-| **ultra** | Abbreviate prose words. Strip conjunctions. Arrows for causality (X → Y) |
+**Option C: All skills** — Copy everything. Orchestrator coordinates.
 
-## The Rules (Quick Reference)
+## Design Principles
 
-### Decision Ladder
-1. YAGNI — does this need to exist?
-2. Stdlib does it — use it
-3. Platform feature — use it
-4. Installed dep — use it
-5. One line — make it one line
-6. Minimum code that works
+1. **One skill per concern** — No mega-skills. Load what you need.
+2. **Iron laws** — Each skill has one non-negotiable rule.
+3. **Agent-agnostic** — Plain Markdown. Works with any agent that reads rules files.
+4. **Tested** — A/B comparison results in [docs/TEST-RESULTS.md](docs/TEST-RESULTS.md).
+5. **Attribution** — Built on Ponytail + Caveman. MIT licensed.
 
-### Coding Rules
-- No abstractions not explicitly requested
-- No new dependency if avoidable
-- No boilerplate nobody asked for
-- Deletion over addition. Boring over clever. Fewest files possible
-- Mark intentional simplifications with `// lazy-dev:` comment
+## Test Results
 
-### Output Compression
-- Drop: articles, filler, pleasantries, hedging
-- Fragments OK. Short synonyms.
-- Pattern: `[thing] [action] [reason]. [next step].`
-- No self-reference ("lazy-dev mode on")
+See [docs/TEST-RESULTS.md](docs/TEST-RESULTS.md) for A/B comparison data across 3 coding tasks.
 
-### Commit Messages
-- Conventional Commits, subject ≤50 chars
-- Body only when "why" isn't obvious
-- Never: "This commit does X", "I", "we"
-
-### Code Review
-- One line per finding: `L<line>: <severity>: <problem>. <fix>.`
-- Severity: 🔴 bug, 🟡 risk, 🔵 nit, ❓ question
-
-### Auto-Clarity
-- Drop compression for: security warnings, irreversible actions, ambiguous sequences
-- Resume compression after clear part done
+**Key finding:** lazy-dev (the core skill) delivers 18-42% token savings with zero quality loss. The failure mode is safe — worst case, the agent writes normal code and talks normally.
 
 ## Attribution
 
-This skill merges the work of two open-source projects:
+- **[Ponytail](https://github.com/DietrichGebert/ponytail)** by DietrichGebert — Decision ladder philosophy
+- **[Caveman](https://github.com/JuliusBrussee/caveman)** by JuliusBrussee — Output compression + commit/review patterns
+- **Hermes Agent** by Nous Research — Testing framework + additional skill patterns
 
-- **[Ponytail](https://github.com/DietrichGebert/ponytail)** by DietrichGebert — MIT License
-- **[Caveman](https://github.com/JuliusBrussee/caveman)** by JuliusBrussee — MIT License
-
-lazy-dev is licensed under MIT. If you use this in your project, a star or mention of the original repos would be appreciated.
+All skills are MIT licensed. Star the original repos if you find this useful.
 
 ## Contributing
 
-Issues and PRs welcome. If you find a case where the decision ladder gives wrong advice, or where compression loses critical meaning, please open an issue with the specific scenario.
+Issues and PRs welcome. If a skill gives wrong advice in your context, open an issue with the specific scenario.
 
 ## License
 

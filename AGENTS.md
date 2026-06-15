@@ -1,1 +1,8 @@
+@./skills/orchestrator/SKILL.md
 @./skills/lazy-dev/SKILL.md
+@./skills/tdd/SKILL.md
+@./skills/debugging/SKILL.md
+@./skills/verification/SKILL.md
+@./skills/security/SKILL.md
+@./skills/planning/SKILL.md
+@./skills/code-review/SKILL.md

@@ -1,10 +1,16 @@
-# lazy-dev — Write Less Code, Say Less Words
+# ai-dev-practices — Best Practices for AI Coding
 
+@./skills/orchestrator/SKILL.md
 @./skills/lazy-dev/SKILL.md
+@./skills/tdd/SKILL.md
+@./skills/debugging/SKILL.md
+@./skills/verification/SKILL.md
+@./skills/security/SKILL.md
+@./skills/planning/SKILL.md
+@./skills/code-review/SKILL.md
 
 ## Claude Code Notes
 
-- Load with `/skill lazy-dev`
-- Escalate compression: `/lazy-dev full` or `/lazy-dev ultra`
-- Revert: `/lazy-dev off` or `normal mode`
-- Default compression: **lite** (drops filler, keeps full sentences)
+- Load individual skills: `/skill lazy-dev`, `/skill tdd`, etc.
+- The orchestrator (`skills/orchestrator/SKILL.md`) coordinates which skill to load per phase
+- Compression levels: `/lazy-dev full` or `/lazy-dev ultra`
