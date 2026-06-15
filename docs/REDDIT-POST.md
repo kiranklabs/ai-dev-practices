@@ -6,7 +6,7 @@
 
 I've been running [Ponytail](https://github.com/DietrichGebert/ponytail) (decision ladder → 80-94% less code) and [Caveman](https://github.com/JuliusBrussee/caveman) (output compression → 65% fewer tokens) side by side and realized they're complementary — one cuts what you write, the other cuts what you say.
 
-Merged them into **[lazy-dev](https://github.com/kiranklabs/lazy-dev)** — a single skill, works with any agent that reads rules files.
+Merged them into **[ai-dev-practices](https://github.com/kiranklabs/ai-dev-practices)** — 8 modular skills, works with any agent that reads rules files.
 
 **The core:**
 
@@ -31,4 +31,4 @@ Plus output compression (drop filler, fragments OK, short synonyms).
 
 **Works with:** Claude Code, Codex, Cursor, Copilot, Cline, Windsurf, Hermes, OpenCode. Just copy the file your agent reads.
 
-[Repo](https://github.com/kiranklabs/lazy-dev) · [Ponytail](https://github.com/DietrichGebert/ponytail) · [Caveman](https://github.com/JuliusBrussee/caveman) — both MIT, lazy-dev is MIT too.
+[Repo](https://github.com/kiranklabs/ai-dev-practices) · [Ponytail](https://github.com/DietrichGebert/ponytail) · [Caveman](https://github.com/JuliusBrussee/caveman) — all MIT.

@@ -104,9 +104,9 @@ See [docs/TEST-RESULTS.md](docs/TEST-RESULTS.md) for A/B comparison data across 
 
 ## Attribution
 
-- **[Ponytail](https://github.com/DietrichGebert/ponytail)** by DietrichGebert — Decision ladder philosophy
-- **[Caveman](https://github.com/JuliusBrussee/caveman)** by JuliusBrussee — Output compression + commit/review patterns
-- **Hermes Agent** by Nous Research — Testing framework + additional skill patterns
+- [Ponytail](https://github.com/DietrichGebert/ponytail) by DietrichGebert — Decision ladder philosophy
+- [Caveman](https://github.com/JuliusBrussee/caveman) by JuliusBrussee — Output compression + commit/review patterns
+- [Hermes Agent](https://github.com/NousResearch/hermes-agent) by Nous Research — Testing framework + skill patterns
 
 All skills are MIT licensed. Star the original repos if you find this useful.
 
