@@ -9,7 +9,7 @@ version: 1.0.0
 license: MIT
 metadata:
   tags: [workflow, orchestrator, dev-lifecycle, planning, debugging, tdd, verification]
-  related_skills: [lazy-dev, test-driven-development, systematic-debugging, verification-before-completion, security-and-hardening, writing-plans, code-review, interview-me, brainstorming, context-engineering]
+  related_skills: [guardrails, lazy-dev, test-driven-development, systematic-debugging, verification-before-completion, security-and-hardening, writing-plans, code-review, interview-me, brainstorming, context-engineering]
 ---
 
 # Orchestrator — Development Lifecycle
@@ -24,6 +24,8 @@ A decision tree that coordinates your dev skills. Don't load everything — load
 
 ## How It Works
 
+**Guardrails is always active.** Load `guardrails` at session start — it classifies every action as RED/YELLOW/GREEN and applies to all phases.
+
 **Phase 0 → Phase 1 → ... → Done.** Each phase loads the right skill. Skip phases that don't apply.
 
 ---
@@ -37,14 +39,18 @@ A decision tree that coordinates your dev skills. Don't load everything — load
 - Load `brainstorming` if this is creative/feature work (not a bugfix)
 - Load `context-engineering` if switching between projects/tasks
 
+**Guardrails:** Classify the scope of work. Is this local-only or does it touch shared/production resources?
+
 **Output:** Clear scope. What to build, what NOT to build.
 
 ### Phase 1: Plan
 **Before writing code.** Break it down.
 
-- Load `writing-plans` for multi-step work (3+ tasks)
+- Load `planning` for multi-step work (3+ tasks)
 - Load `spike` if you need to validate an approach before committing
 - Load `api-and-interface-design` if designing/modifying APIs
+
+**Guardrails:** Flag destructive steps in the plan (migrations, deletions, infrastructure changes). Mark them for confirmation.
 
 **Output:** Ordered task list with exact file paths and success criteria.
 
@@ -56,16 +62,20 @@ A decision tree that coordinates your dev skills. Don't load everything — load
 - Load `source-driven-development` if you need to ground decisions in official docs
 - Load `frontend-ui-engineering` if building UI components
 
+**Guardrails:** RED/YELLOW classification on every tool call that modifies state.
+
 **Output:** Working code with tests.
 
 ### Phase 3: Quality
 **Before claiming "done."**
 
-- Load `verification-before-completion` — **always load this before finishing**
-- Load `security-and-hardening` if touching auth, input handling, data storage
+- Load `verification` — **always load this before finishing**
+- Load `security` if touching auth, input handling, data storage
 - Load `performance-optimization` if there are perf requirements
 - Load `observability-and-instrumentation` if adding new features to production code
 - Load `doubt-driven-development` if correctness is critical
+
+**Guardrails:** Post-action verification. Did the action do ONLY what was intended?
 
 **Output:** Verified, hardened code.
 
@@ -111,17 +121,19 @@ A decision tree that coordinates your dev skills. Don't load everything — load
 
 ## Rules
 
-1. **Always load `lazy-dev` in Phase 2** — it's the default coding posture
-2. **Always load `verification-before-completion` in Phase 3** — never skip verification
-3. **Don't load all skills at once** — load per-phase, unload when done
-4. **Debugging is not sequential** — it can jump in from any phase
-5. **Each skill is independent** — loading one doesn't require loading others
+1. **Always load `guardrails` at session start** — universal overlay, never卸载
+2. **Always load `lazy-dev` in Phase 2** — it's the default coding posture
+3. **Always load `verification` in Phase 3** — never skip verification
+4. **Don't load all skills at once** — load per-phase, unload when done
+5. **Debugging is not sequential** — it can jump in from any phase
+6. **Each skill is independent** — loading one doesn't require loading others
 
 ## Non-Negotiable
 
 These apply regardless of which phase you're in:
 
-- Security checks when touching auth/input/data (from `security-and-hardening`)
-- Verification before claiming done (from `verification-before-completion`)
+- **Guardrails:** Classify every action. RED requires confirmation. Never assume scope. (from `guardrails`)
+- Security checks when touching auth/input/data (from `security`)
+- Verification before claiming done (from `verification`)
 - Decision ladder before writing code (from `lazy-dev`)
-- Tests before implementation when possible (from `test-driven-development`)
+- Tests before implementation when possible (from `tdd`)

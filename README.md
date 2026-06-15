@@ -10,6 +10,7 @@ A collection of 8 skills that cover the full software development lifecycle. Eac
 
 | Skill | What it does | Iron Law |
 |-------|-------------|----------|
+| **[guardrails](skills/guardrails/SKILL.md)** | Pre-action safety checklist | Classify every action RED/YELLOW/GREEN |
 | **[lazy-dev](skills/lazy-dev/SKILL.md)** | Write less code, say less words | YAGNI + output compression |
 | **[tdd](skills/tdd/SKILL.md)** | Test-driven development | No code without a failing test first |
 | **[debugging](skills/debugging/SKILL.md)** | Systematic root cause analysis | No fixes without investigation first |
@@ -19,12 +20,13 @@ A collection of 8 skills that cover the full software development lifecycle. Eac
 | **[code-review](skills/code-review/SKILL.md)** | Request + receive reviews | Verify before implementing feedback |
 | **[orchestrator](skills/orchestrator/SKILL.md)** | Decision tree for the lifecycle | Load the right skill at the right phase |
 
-**Total: ~42KB of rules.** Load one at a time, not all at once.
+**Total: ~52KB of rules.** Load one at a time, not all at once. `guardrails` is the universal overlay — always active.
 
 ## The Lifecycle
 
 ```
-Phase 0: Understand  →  What does the user actually need?
+Phase -1: Guardrails  →  Classify every action. RED/YELLOW/GREEN.
+Phase 0: Understand   →  What does the user actually need?
 Phase 1: Plan        →  Break it into 2-5 min tasks
 Phase 2: Implement   →  lazy-dev + tdd (write less, test first)
 Phase 3: Quality     →  verification + security
@@ -82,7 +84,7 @@ cp -r skills/* ~/.hermes/skills/software-development/
 
 ## Installation (Pick Your Style)
 
-**Option A: Orchestrator only** — One file that references all skills. Agent loads skills on-demand per phase.
+**Option A: Orchestrator only** — One file that references all skills. Agent loads skills on-demand per phase. Guardrails always active.
 
 **Option B: Individual skills** — Copy only the skills you want. Mix and match.
 

@@ -1,3 +1,4 @@
+@./skills/guardrails/SKILL.md
 @./skills/orchestrator/SKILL.md
 @./skills/lazy-dev/SKILL.md
 @./skills/tdd/SKILL.md
